@@ -1,0 +1,148 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: #fbd324;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('fundo.png'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roulette-section {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 12px solid #ff52b6;
+    overflow: hidden;
+    transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    background: conic-gradient(
+        from -22.5deg,
+        #b7ff65 0deg 45deg,
+        #70d5e6 45deg 90deg,
+        #f9b208 90deg 135deg,
+        #ff68b4 135deg 180deg,
+        #b7ff65 180deg 225deg,
+        #70d5e6 225deg 270deg,
+        #f9b208 270deg 315deg,
+        #ff68b4 315deg 360deg
+    );
+}
+
+.slice-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110px;
+    margin-left: -55px;
+    margin-top: -10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    transform: rotate(var(--angle)) translateY(-160px);
+}
+
+.pointer-wrapper {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    z-index: 100;
+}
+
+.pointer {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 50px solid #ffffff;
+}
+
+/* BOTÃO PULSANDO */
+.spin-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    z-index: 110;
+    cursor: pointer;
+    /* Adiciona a animação: nome, duração, repetição e suavidade */
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Definição da animação de pulsar */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1); /* Aumenta 10% */
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Mensagem de resultado customizável */
+.result-message {
+    position: absolute;
+    bottom: 30px; /* Mude aqui para subir ou descer a mensagem */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    font-family: 'Inter', sans-serif; /* Mude aqui o nome da fonte */
+    font-weight: 900;
+    color: #ff52b6;
+    text-align: center;
+    opacity: 0;
+    transition: 0.5s;
+    white-space: nowrap;
+    z-index: 120;
+}
+
+.result-message.show {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .roulette-section { width: 340px; height: 340px; }
+    .slice-text { font-size: 11px; transform: rotate(var(--angle)) translateY(-105px); width: 90px; margin-left: -45px;}
+    .result-message { font-size: 22px; white-space: normal; width: 90%; bottom: 40px; }
+}
